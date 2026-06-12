@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  /* Colors matched directly to image_6a0a7a.png */
+  --bg: #141517; /* Main Dashboard Background */
+  --surface-sidebar: #1a1c1e; /* Left Navigation Panel */
+  --surface-card: #1e2022; /* Right Content Panel Card */
+
+  --text: #8e9296; /* Muted Slate Gray (Secondary Text/Labels) */
+  --text-h: #ffffff; /* Crisp White (Headers and Active Text) */
+
+  --border: #2c2e30; /* Muted Slate (Used for Search/Tags) */
+  --code-bg: #1a1c1e; /* Code background matching sidebar */
+
+  --accent: #1a66ff; /* Vibrant Steam Blue (Purchase Button/Active State) */
+  --accent-bg: rgba(26, 102, 255, 0.1); /* Translucent Accent for Hovers */
+  --accent-border: rgba(26, 102, 255, 0.5); /* Focused Accent Border */
+
+  --social-bg: rgba(44, 46, 48, 0.5); /* Semitransparent tag background */
+  --shadow:
+    rgba(0, 0, 0, 0.5) 0 10px 15px -3px, rgba(0, 0, 0, 0.3) 0 4px 6px -2px; /* Deeper shadows for dark mode */
+
+  /* Typography & Layout Rules */
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: dark; /* Overridden to strictly dark to match the UI design */
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+  --font-primary:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --text-primary: #ffffff; /* Crisp white for headers */
+  --text-secondary: #8e9296; /* Muted slate for body/labels */
+  --text-muted: #b5b9bd; /* Light gray for tags and placeholders */
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+#root {
+  width: 1920px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+}
+
+body {
+  margin: 0;
+}
