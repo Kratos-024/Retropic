@@ -6,17 +6,28 @@ const popularGames = [
     genre: "Racing",
     bg: "linear-gradient(135deg, #0a0a0a, #1a1a2e)",
     label: "F1 22",
+    src: " ./public/got-chain.jpg",
   },
   {
+    src: " ./public/got-chain.jpg",
+
     title: "Call of Duty: MW",
     genre: "Action",
     bg: "linear-gradient(135deg, #0d0d0d, #1a1200)",
     label: "MODERN\nWARFARE",
   },
   {
+    src: " ./public/got-chain.jpg",
     title: "Fifa 22",
     genre: "Sports",
-    bg: "linear-gradient(135deg, #001a3a, #003080)",
+    bg: " ./public/got-chain.jpg",
+    label: "FIFA 22",
+  },
+  {
+    src: " ./public/got-chain.jpg",
+    title: "Fifa 22",
+    genre: "Sports",
+    bg: " ./public/got-chain.jpg",
     label: "FIFA 22",
   },
 ];
@@ -24,17 +35,19 @@ const popularGames = [
 export const MostPopular = () => (
   <div>
     <SectionHeader title="Most Popular" />
-    <div className="grid grid-cols-3 gap-3">
+    <div className="grid grid-cols-4 gap-3">
       {popularGames.map((game) => (
-        <div key={game.title}>
+        <div
+          className="hover:scale-110 transition-transform duration-300 ease-out"
+          key={game.title}
+        >
           <div
-            className="rounded-xl h-28 flex items-center justify-center mb-2"
+            className="rounded-xl flex items-center justify-center mb-2"
             style={{ background: game.bg }}
           >
-            <span className="text-white font-black text-lg text-center whitespace-pre-line leading-tight">
-              {game.label}
-            </span>
+            <img className="rounded-xl" src={game.src} />
           </div>
+
           <div className="flex justify-between items-center">
             <span className="text-xs text-[#e5e5e7]">{game.title}</span>
             <span className="text-xs text-[#8e8e93]">{game.genre}</span>

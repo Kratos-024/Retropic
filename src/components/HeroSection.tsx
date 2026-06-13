@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const tags = [
   { label: "Role playing", icon: "🎭" },
@@ -12,31 +12,50 @@ const friends = [
   "https://i.pravatar.cc/24?img=3",
 ];
 
+const slides = [
+  "./public/tekken.jpg",
+  "./public/Got.jpg",
+  "./public/got-chain.jpg",
+];
+
 export const HeroSection = () => {
   const [purchased, setPurchased] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+        setFade(true);
+      }, 400);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const currentImg = slides[currentIndex];
 
   return (
     <section className="p-4">
-      <div
-        // bg-[#1c1c1e]
-        className="flex overflow-hidden 
-      w-full"
-      >
+      <div className="flex overflow-hidden w-full">
         <div className="relative w-[75%] min-h-126.5">
           <img
-            src="./public/tekken.jpg"
+            src={currentImg}
             alt="Ghost of Tsushima"
             className="absolute rounded-4xl inset-0 w-full h-full object-cover"
+            style={{
+              opacity: fade ? 1 : 0,
+              transition: "opacity 400ms ease-in-out",
+            }}
           />
-          {/* gradient overlay */}
           <div className="rounded-4xl absolute inset-0 bg-linear-to-r from-transparent via-transparent to-[#1c1c1e]" />
 
-          {/* Platform icons */}
           <div className="absolute top-3 left-3 flex gap-1.5 z-10">
             {["PS", "XB", "PC"].map((p) => (
               <span
                 key={p}
-                className="bg-[#2c2c2e] text-white text-[10px] font-bold px-1.5 py-0.5 "
+                className="bg-[#2c2c2e] text-white text-[10px] font-bold px-1.5 py-0.5"
               >
                 {p}
               </span>
