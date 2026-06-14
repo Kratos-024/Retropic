@@ -11,12 +11,9 @@ const friends = [
   "https://i.pravatar.cc/24?img=2",
   "https://i.pravatar.cc/24?img=3",
 ];
-
-const slides = [
-  "./public/tekken.jpg",
-  "./public/Got.jpg",
-  "./public/got-chain.jpg",
-];
+// "./public/tekken.jpg",
+// "./public/Got.jpg",
+const slides = ["./public/got-chain.jpg"];
 
 export const HeroSection = () => {
   const [purchased, setPurchased] = useState(false);

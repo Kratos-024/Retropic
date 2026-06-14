@@ -1,17 +1,5 @@
+import { wishlistGames } from "../../public/Constants";
 import { SectionHeader } from "./BodySection";
-
-const wishlistGames = [
-  {
-    title: "Grand Theft Auto V",
-    bg: "linear-gradient(135deg, #1a0a00, #3d1a00)",
-    watermark: "GTA V",
-  },
-  {
-    title: "Death Stranding",
-    bg: "linear-gradient(135deg, #0a1a1a, #002222)",
-    watermark: "DEATH\nSTRANDING",
-  },
-];
 
 export const Wishlist = () => (
   <div>

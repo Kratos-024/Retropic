@@ -11,7 +11,7 @@ export default function Sidebar() {
 
   return (
     <div className="flex flex-col gap-6 w-46 text-primary">
-      <div className="relative flex items-center gap-3 cursor-pointer hover:text-blue-700">
+      <div className="relative flex   items-center gap-3 cursor-pointer hover:text-blue-700">
         <p className="absolute -left-6 top-1/2 -translate-y-1/2 w-1 h-5 bg-blue-600 opacity-0 hover:opacity-100 transition-all"></p>
         <GoHome />
         <p>Home</p>

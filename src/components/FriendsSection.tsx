@@ -1,26 +1,5 @@
 import { SectionHeader } from "./BodySection";
-
-const friends = [
-  {
-    img: "https://i.pravatar.cc/32?img=11",
-    name: "Ryan Franci",
-    status: "Playing GTA V",
-    online: true,
-    action: "Join the game",
-  },
-  {
-    img: "https://i.pravatar.cc/32?img=5",
-    name: "Kierra Donin",
-    status: "Last played 2 hours ago",
-    online: false,
-  },
-  {
-    img: "https://i.pravatar.cc/32?img=8",
-    name: "Brandon Vaccaro",
-    status: "Last played yesterday",
-    online: false,
-  },
-];
+import { friends } from "../../public/Constants";
 
 export const Friends = () => (
   <div>
