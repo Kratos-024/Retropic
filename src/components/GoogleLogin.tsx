@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import GoogleIcon from "../../public/svgs/Google";
-import type { GoogleLoginModalProps } from "../types/Props";
+import type { authUser, GoogleLoginModalProps } from "../types/Props";
+import { data } from "react-router-dom";
 
 export const GoogleLoginModal = ({
   onClose,
@@ -17,21 +18,26 @@ export const GoogleLoginModal = ({
   };
 
   useEffect(() => {
-    const unsubscribe = window.electronApi?.onLoginSuccess((sessionData) => {
-      setUser(sessionData);
-    });
     window.electronApi.checkExistingSession().then((savedUser) => {
       if (savedUser) {
         setUser(savedUser);
       }
     });
-    return () => {
-      unsubscribe?.();
-    };
+
+    // const unsubscribe = window.electronApi?.onLoginSuccess((sessionData) => {
+    //   console.log("sessionDatasessionDatasessionData", sessionData);
+    //   setUser(sessionData);
+    // });
+
+    // return () => {
+    //   unsubscribe?.();
+    // };
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     window.electronApi.startGoogleLogin();
+    const userInfo = await window.electronApi.checkExistingSession();
+    setUser(userInfo);
   };
   return (
     <div

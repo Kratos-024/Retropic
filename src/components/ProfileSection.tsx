@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { user, menuItems } from "../../public/Constants";
+import { menuItems } from "../../public/Constants";
 
-export default function ProfileDropdown() {
+export default function ProfileDropdown({ user }: { user: any }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -23,7 +23,7 @@ export default function ProfileDropdown() {
           className="flex items-center gap-2.5 px-3 py-1.5 rounded-xlborder border-white/10 transition-all duration-200"
         >
           <img
-            src={user.avatar}
+            src={user.picture}
             alt={user.name}
             className="w-8 h-8 rounded-full object-cover ring-2 ring-white/20"
           />
@@ -49,7 +49,7 @@ export default function ProfileDropdown() {
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <img
-                    src={user.avatar}
+                    src={user.picture}
                     alt={user.name}
                     className="w-12 h-12 rounded-full object-cover ring-2 ring-blue-500/50"
                   />
@@ -69,7 +69,6 @@ export default function ProfileDropdown() {
                 </div>
               </div>
 
-              {/* Stats Row */}
               <div className="flex gap-3 mt-3">
                 {[
                   { label: "Games", value: "47" },

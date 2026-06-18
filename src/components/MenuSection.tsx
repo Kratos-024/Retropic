@@ -5,13 +5,22 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaUserFriends } from "react-icons/fa";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
   const [openStore, setOpenStore] = useState(false);
-
+  const onCickHandler = (page: string) => {
+    navigate(`/${page}`);
+  };
   return (
     <div className="flex flex-col gap-6 w-46 text-primary">
-      <div className="relative flex   items-center gap-3 cursor-pointer hover:text-blue-700">
+      <div
+        onClick={() => {
+          onCickHandler("/");
+        }}
+        className="relative flex  cursor-pointer items-center gap-3 -pointer hover:text-blue-700"
+      >
         <p className="absolute -left-6 top-1/2 -translate-y-1/2 w-1 h-5 bg-blue-600 opacity-0 hover:opacity-100 transition-all"></p>
         <GoHome />
         <p>Home</p>
@@ -19,7 +28,9 @@ export default function Sidebar() {
 
       <div className="flex flex-col">
         <div
-          onClick={() => setOpenStore(!openStore)}
+          onClick={() => {
+            setOpenStore(!openStore);
+          }}
           className={`relative   flex items-center gap-3 cursor-pointer hover:text-blue-700 ${openStore ? "mb-3" : ""}`}
         >
           <p className="absolute -left-6 top-1/2 -translate-y-1/2 w-1 h-5 bg-blue-600 opacity-0 hover:opacity-100 transition-all"></p>

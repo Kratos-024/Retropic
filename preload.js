@@ -1,7 +1,10 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("electronApi", {
-  startGoogleLogin: () => ipcRenderer.send("auth:start-login"),
+  startGoogleLogin: async () => {
+    const data = await ipcRenderer.invoke("auth:start-login");
+    return data;
+  },
   onLoginSuccess: (callback) => {
     const subscription = (event, session) => callback(session);
     ipcRenderer.on("auth:success", subscription);
@@ -10,5 +13,8 @@ contextBridge.exposeInMainWorld("electronApi", {
       ipcRenderer.removeListener("auth:success", subscription);
     };
   },
-  checkExistingSession: () => ipcRenderer.invoke("auth:check-session"),
+  checkExistingSession: async () => {
+    const auth = await ipcRenderer.invoke("auth:check-session");
+    return auth;
+  },
 });

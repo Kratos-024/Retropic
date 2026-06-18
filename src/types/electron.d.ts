@@ -1,5 +1,5 @@
 interface IElectronApi {
-  startGoogleLogin: () => void;
+  startGoogleLogin: () => Promise<authUser>;
   onLoginSuccess: (callback: (session: any) => void) => () => void;
   checkExistingSession: () => Promise<any>;
 }

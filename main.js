@@ -5,14 +5,14 @@ const url = require("url");
 const axios = require("axios");
 const Store = require("electron-store").default;
 const { jwtDecode } = require("jwt-decode");
-
-const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-
+require("dotenv").config({ path: ".env" });
+const CLIENT_ID = process.env.MAIN_VITE_GOOGLE_CLIENT_ID;
+const client_secret = process.env.MAIN_VITE_GOOGLE_CLIENT_SECRET;
 const REDIRECT_PORT = 42813;
 const REDIRECT_URI = `http://localhost:${REDIRECT_PORT}`;
 
 const safeStore = new Store({
-  encryptionKey: "a-key123@",
+  encryptionKey: "your-safe-encryption-key-string",
 });
 
 let win;
@@ -34,29 +34,6 @@ function createWindow() {
   }
 }
 
-async function getValidAccessToken() {
-  const refreshToken = safeStore.get("refresh_token");
-  if (!refreshToken) return null;
-
-  try {
-    const response = await axios.post(
-      "https://oauth2.googleapis.com/token",
-      new URLSearchParams({
-        client_id: CLIENT_ID,
-        client_secret: "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",
-        refresh_token: refreshToken,
-        grant_type: "refresh_token",
-      }),
-    );
-
-    safeStore.set("access_token", response.data.access_token);
-    return response.data.access_token;
-  } catch (error) {
-    console.error("Failed to refresh token", error);
-    return null;
-  }
-}
-
 ipcMain.on("auth:logout", (event) => {
   safeStore.delete("access_token");
   safeStore.delete("refresh_token");
@@ -68,6 +45,9 @@ function saveTokens(tokens) {
   if (tokens.refresh_token) {
     safeStore.set("refresh_token", tokens.refresh_token);
   }
+  if (tokens.id_token) {
+    safeStore.set("id_token", tokens.id_token);
+  }
 }
 async function exchangeCodeForTokens(code) {
   const tokenUrl = "https://oauth2.googleapis.com/token";
@@ -75,7 +55,7 @@ async function exchangeCodeForTokens(code) {
   const payload = {
     code,
     client_id: CLIENT_ID,
-    client_secret: process.env.GOOGLE_CLIENT_SECRET,
+    client_secret: client_secret,
     redirect_uri: REDIRECT_URI,
     grant_type: "authorization_code",
   };
@@ -125,6 +105,7 @@ function openGoogleAuth() {
     response_type: "code",
     prompt: "consent",
     scope: [
+      "openid",
       "https://www.googleapis.com/auth/userinfo.profile",
       "https://www.googleapis.com/auth/userinfo.email",
     ].join(" "),
@@ -135,7 +116,7 @@ function openGoogleAuth() {
 
   shell.openExternal(authUrl);
 }
-ipcMain.on("auth:start-login", async (event) => {
+ipcMain.handle("auth:start-login", async (event) => {
   try {
     const authCodePromise = startLoopbackServer();
     openGoogleAuth();
@@ -144,6 +125,7 @@ ipcMain.on("auth:start-login", async (event) => {
     const tokens = await exchangeCodeForTokens(authCode);
 
     saveTokens(tokens);
+    return tokens;
   } catch (error) {
     console.error("Auth flow failed:", error);
   }
@@ -151,12 +133,13 @@ ipcMain.on("auth:start-login", async (event) => {
 
 ipcMain.handle("auth:check-session", async () => {
   const accessToken = safeStore.get("access_token");
-
   if (!accessToken) return null;
   try {
     const idToken = safeStore.get("id_token");
+
     if (idToken) {
       const decodedProfile = jwtDecode(idToken);
+
       return {
         name: decodedProfile.name,
         email: decodedProfile.email,
@@ -171,6 +154,28 @@ ipcMain.handle("auth:check-session", async () => {
 });
 app.whenReady().then(createWindow);
 
+// async function getValidAccessToken() {
+//   const refreshToken = safeStore.get("refresh_token");
+//   if (!refreshToken) return null;
+
+//   try {
+//     const response = await axios.post(
+//       "https://oauth2.googleapis.com/token",
+//       new URLSearchParams({
+//         client_id: CLIENT_ID,
+//         client_secret: "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",
+//         refresh_token: refreshToken,
+//         grant_type: "refresh_token",
+//       }),
+//     );
+
+//     safeStore.set("access_token", response.data.access_token);
+//     return response.data.access_token;
+//   } catch (error) {
+//     console.error("Failed to refresh token", error);
+//     return null;
+//   }
+// }
 // const decodedProfile = jwtDecode(tokens.id_token);
 //     // const sessionInfo = {
 //     //   name: decodedProfile.name,
