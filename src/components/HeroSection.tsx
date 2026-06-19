@@ -13,7 +13,11 @@ const friends = [
 ];
 // "./public/tekken.jpg",
 // "./public/Got.jpg",
-const slides = ["./public/got-chain.jpg"];
+const slides = [
+  "./public/got-chain.jpg",
+  "./public/tekken.jpg",
+  "./public/Got.jpg",
+];
 
 export const HeroSection = () => {
   const [purchased, setPurchased] = useState(false);

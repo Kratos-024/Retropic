@@ -1,39 +1,7 @@
 import { SectionHeader } from "./BodySection";
 import data from "../../psp_games.json";
 import { CiHeart } from "react-icons/ci";
-import { FaHeart } from "react-icons/fa";
 
-// const popularGames = [
-//   {
-//     title: "F1 22",
-//     genre: "Racing",
-//     bg: "linear-gradient(135deg, #0a0a0a, #1a1a2e)",
-//     label: "F1 22",
-//     src: " ./public/got-chain.jpg",
-//   },
-//   {
-//     src: " ./public/got-chain.jpg",
-
-//     title: "Call of Duty: MW",
-//     genre: "Action",
-//     bg: "linear-gradient(135deg, #0d0d0d, #1a1200)",
-//     label: "MODERN\nWARFARE",
-//   },
-//   {
-//     src: " ./public/got-chain.jpg",
-//     title: "Fifa 22",
-//     genre: "Sports",
-//     bg: " ./public/got-chain.jpg",
-//     label: "FIFA 22",
-//   },
-//   {
-//     src: " ./public/got-chain.jpg",
-//     title: "Fifa 22",
-//     genre: "Sports",
-//     bg: " ./public/got-chain.jpg",
-//     label: "FIFA 22",
-//   },
-// ];
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
