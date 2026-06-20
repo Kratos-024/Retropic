@@ -75,8 +75,8 @@ export default function Sidebar() {
 }
 export const MenuSection = () => {
   return (
-    <section className="relative  ">
-      <p className=" absolute w-px h-screen bg-gray-600  right-0"></p>
+    <section className="relative   ">
+      <p className=" absolute w-px h-screen b right-0"></p>
       <div className="w-75">
         <div className=" flex items-start  flex-col">
           <div className="  mb-10 flex items-center  w-fit gap-2">

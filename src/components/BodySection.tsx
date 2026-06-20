@@ -5,7 +5,6 @@ import { Wishlist } from "./Whislist";
 export const SectionHeader = ({ title }: { title: string }) => (
   <div className="flex justify-between items-center mb-4">
     <span className="text-base font-semibold text-white">{title}</span>
-    <button className="text-sm text-[#0a84ff]">See all ›</button>
   </div>
 );
 

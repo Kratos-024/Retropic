@@ -1,4 +1,4 @@
-import MenuSection from "../components/MenuSection";
+import { MenuSection } from "../components/MenuSection";
 import { NavBar } from "../components/NavBar";
 import { WhislistSection } from "../components/WhislistSection";
 
