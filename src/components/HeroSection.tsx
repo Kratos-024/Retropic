@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type SetStateAction } from "react";
+import type { GameData } from "../Apis/GamesInfo";
 
 const tags = [
   { label: "Role playing", icon: "🎭" },
@@ -19,7 +20,11 @@ const slides = [
   "./public/Got.jpg",
 ];
 
-export const HeroSection = () => {
+export const HeroSection = ({
+  setGameData,
+}: {
+  setGameData: React.Dispatch<SetStateAction<GameData>>;
+}) => {
   const [purchased, setPurchased] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(true);

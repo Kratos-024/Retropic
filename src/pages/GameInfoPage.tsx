@@ -1,9 +1,10 @@
+import type { GameData } from "../Apis/GamesInfo";
 import { GameInfoSection } from "../components/GameInfoSection";
 import { MenuSection } from "../components/MenuSection";
 import { NavBar } from "../components/NavBar";
 import { SimilarGames } from "../components/SimilarGames";
 
-export const GameInfoPage = () => {
+export const GameInfoPage = ({ gameData }: { gameData: GameData }) => {
   return (
     <section className="w-full  px-6 py-4 ">
       <div className="flex gap-5  ">
@@ -11,7 +12,7 @@ export const GameInfoPage = () => {
         <div>
           <div className="w-full   ">
             <NavBar />
-            <GameInfoSection />
+            <GameInfoSection gameData={gameData} />
           </div>
 
           <SimilarGames />

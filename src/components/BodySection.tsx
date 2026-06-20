@@ -1,3 +1,5 @@
+import type { SetStateAction } from "react";
+import type { GameData } from "../Apis/GamesInfo";
 import { Friends } from "./FriendsSection";
 import { MostPopular } from "./MostPopular";
 import { Wishlist } from "./Whislist";
@@ -8,10 +10,14 @@ export const SectionHeader = ({ title }: { title: string }) => (
   </div>
 );
 
-export const Body = () => {
+export const Body = ({
+  setGameData,
+}: {
+  setGameData: React.Dispatch<SetStateAction<GameData>>;
+}) => {
   return (
     <section className=" rounded-2xl p-6 text-white space-y-7">
-      <MostPopular />
+      <MostPopular setGameData={setGameData} />
       <div className="grid grid-cols-[1fr_220px] gap-5">
         <Wishlist />
         <Friends />

@@ -1,12 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type SetStateAction } from "react";
 import { SectionHeader } from "./BodySection";
 import Heart from "./MostPopular";
 import data from "../../psp_games.json";
 import { Link } from "react-router-dom";
+import type { GameData } from "../Apis/GamesInfo";
 
 const ITEMS_PER_LOAD = 12;
 
-export const WhislistSection = () => {
+export const WhislistSection = ({
+  setGameData,
+}: {
+  setGameData: React.Dispatch<SetStateAction<GameData>>;
+}) => {
   const [displayCount, setDisplayCount] = useState(ITEMS_PER_LOAD);
   const observerTarget = useRef(null);
 
